@@ -9,7 +9,7 @@ namespace CalcMachine
                 Write the following commands for what your needs are:
 
                 |1 or SIMPLE - Does only one operation.
-                |2 or FULL   - Does how many operations you want.
+                |2 or FULL   - Does complex expressions with parentheses.
                 |3 or BACK   - Goes Back to Main Menu.
                 |__________________________________________________________");
                 string? Switch = Console.ReadLine() ?? "0";
@@ -24,6 +24,10 @@ namespace CalcMachine
                 |/   -> a / b = c
                 |^   -> a ^ b = c
                 |Log -> LogA(base B) = C
+                |
+                |Examples:
+                |  Simple: 1+1
+                |  Full:   (1+1)*2
                 |__________________________________________________________");
 
                 switch(Switch)
@@ -38,132 +42,201 @@ namespace CalcMachine
 
                 case "BACK" or "3":
                     Programa.MainMenu();
+                break;
+                
+                default:
                 break;               
                 }
             
-                if (Switch is not "BACK") { Basic.Open(); }
+                if (Switch is not "BACK" && Switch is not "3") { Basic.Open(); }
 
             }
 
              public static void Simple()
              {
-                Console.WriteLine("Write the two numbers and then the operation symbol");
-                double  num1 = 0;
-                double  num2 = 0;
-                        num1 = Convert.ToDouble(Console.ReadLine());
-                        num2 = Convert.ToDouble(Console.ReadLine());    
-                string  symb = Console.ReadLine() ?? "+";
-                double res  = 0;
-                if (symb == "X" ^ symb == "x") {symb = "*";}
-
-                switch (symb)
+                Console.WriteLine("Enter your expression (e.g., 1+1):");
+                string? expression = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(expression))
                 {
-                 case "+":
-                    res = num1 + num2;
-                    Console.WriteLine($"{num1} + {num2} = {res}");
-                 break;
+                    Console.WriteLine("Invalid input");
+                    return;
+                }
 
-                 case "-":
-                    res = num1 - num2; 
-                    Console.WriteLine($"{num1} - {num2} = {res}");
-                 break;
-
-                 case "*":
-                    res = num1 * num2;
-                    Console.WriteLine($"{num1} * {num2} = {res}");
-                 break;
-
-                 case "/":
-                    res = num1 / num2;
-                    Console.WriteLine($"{num1} / {num2} = {res}");
-                 break;
-
-                 case "^":
-                    res = Math.Pow(num1, num2);
-                    Console.WriteLine($"{num1}^{num2} = {res}");
-                 break;
-
-                 case "log":
-                    res = Math.Log(num1, num2);
-                    Console.WriteLine($"The Logarithm {num1} of base {num2} is {res}");
-                 break;
-
-                 default: Console.WriteLine("Invalid Operation"); break;
+                try
+                {
+                    double result = EvaluateExpression(expression);
+                    Console.WriteLine($"{expression} = {result}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
                 }
              }
 
              public static void Full()
              {
-                Console.WriteLine("Type how many operations will happen ");
-                int HowLong = Convert.ToInt32(Console.ReadLine());
-
-                List<double> InumberList = new List<double>() {}; //Inputs the user-selected number
-                List<double> LogList = new List<double>() {}; //List for the log
-                List<string> operationList = new List<string>() {}; //Lists the operations
-                List<double> OnumberList = new List<double>() {}; //Output of the Input
-                int i = HowLong+1;
-
-                for(i = HowLong+1; i > HowLong; i--) //Bootstrap for getting the first Item of the Input
+                Console.WriteLine("Enter your expression with parentheses (e.g., (1+1)*2):");
+                string? expression = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(expression))
                 {
-                Console.WriteLine($"Write your first number"); 
-                double Inum = Convert.ToDouble(Console.ReadLine()); //Gets the first Number
-                InumberList.Add(Inum); 
-                LogList.Add(Inum);
+                    Console.WriteLine("Invalid input");
+                    return;
                 }
 
-                for(i = HowLong-1; i > 0; i--) // i = Howlong-1 accounting for the first number being added by the bootstrap
+                try
                 {
-                Console.WriteLine("Write the operation");
-                string Iop = Console.ReadLine() ?? "+";
-                operationList.Add(Iop); //Guarantees nullable exception will not happen
-                Programa.E.ClearLine(2, 0);
+                    double result = EvaluateExpression(expression);
+                    Console.WriteLine($"{expression} = {result}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
+             }
 
-                Console.WriteLine($"({i} remaining!) Write your number");
-                double Inum = Convert.ToDouble(Console.ReadLine()); //Gets the following numbers 
-                Programa.E.ClearLine(2, 0);
-                
-                InumberList.Add(Inum);
-                LogList.Add(Inum);  
-                
-                double Onum = 0; //just declaring Onum beforehand to avoid errors
-                Onum = OperationSwitch(Iop, InumberList[^1], InumberList[^2]);
-                // ^ Receives the values to be used in the operations
-                double OperationSwitch(string OpSwitch, double num1, double num2)
-                
+             private static double EvaluateExpression(string expression)
+             {
+                expression = expression.Replace(" ", "").ToLower();
+                int pos = 0;
+                return ParseExpression(expression, ref pos);
+             }
+
+             private static double ParseExpression(string expr, ref int pos)
+             {
+                double left = ParseTerm(expr, ref pos);
+
+                while (pos < expr.Length)
                 {
-                if (OnumberList is not null)
+                    char op = expr[pos];
+                    if (op != '+' && op != '-')
+                        break;
+                    
+                    pos++;
+                    double right = ParseTerm(expr, ref pos);
+                    
+                    if (op == '+')
+                        left += right;
+                    else
+                        left -= right;
+                }
+
+                return left;
+             }
+
+             private static double ParseTerm(string expr, ref int pos)
+             {
+                double left = ParseFactor(expr, ref pos);
+
+                while (pos < expr.Length)
                 {
-                switch(OpSwitch)
+                    char op = expr[pos];
+                    if (op != '*' && op != '/' && op != 'x')
+                        break;
+                    
+                    pos++;
+                    double right = ParseFactor(expr, ref pos);
+                    
+                    if (op == '*' || op == 'x')
+                        left *= right;
+                    else
+                        left /= right;
+                }
+
+                return left;
+             }
+
+             private static double ParseFactor(string expr, ref int pos)
+             {
+                double left = ParsePower(expr, ref pos);
+                return left;
+             }
+
+             private static double ParsePower(string expr, ref int pos)
+             {
+                double left = ParseUnary(expr, ref pos);
+
+                while (pos < expr.Length && expr[pos] == '^')
+                {
+                    pos++;
+                    double right = ParsePower(expr, ref pos);
+                    left = Math.Pow(left, right);
+                }
+
+                return left;
+             }
+
+             private static double ParseUnary(string expr, ref int pos)
+             {
+                if (pos < expr.Length && expr[pos] == '-')
+                {
+                    pos++;
+                    return -ParseUnary(expr, ref pos);
+                }
+                if (pos < expr.Length && expr[pos] == '+')
+                {
+                    pos++;
+                    return ParseUnary(expr, ref pos);
+                }
+                return ParsePrimary(expr, ref pos);
+             }
+
+             private static double ParsePrimary(string expr, ref int pos)
+             {
+                if (pos >= expr.Length)
+                    throw new Exception("Unexpected end of expression");
+
+                if (expr[pos] == '(')
+                {
+                    pos++;
+                    double result = ParseExpression(expr, ref pos);
+                    if (pos >= expr.Length || expr[pos] != ')')
+                        throw new Exception("Missing closing parenthesis");
+                    pos++;
+                    return result;
+                }
+
+                if (pos + 3 <= expr.Length && expr.Substring(pos, 3) == "log")
+                {
+                    pos += 3;
+                    if (pos >= expr.Length || expr[pos] != '(')
+                        throw new Exception("log requires format: log(value,base)");
+                    pos++;
+                    double value = ParseExpression(expr, ref pos);
+                    if (pos >= expr.Length || expr[pos] != ',')
+                        throw new Exception("log requires format: log(value,base)");
+                    pos++;
+                    double baseValue = ParseExpression(expr, ref pos);
+                    if (pos >= expr.Length || expr[pos] != ')')
+                        throw new Exception("Missing closing parenthesis for log");
+                    pos++;
+                    return Math.Log(value, baseValue);
+                }
+
+                int start = pos;
+                if (expr[pos] == '-' || expr[pos] == '+')
+                    pos++;
+
+                bool hasDigit = false;
+                bool hasDot = false;
+                while (pos < expr.Length && (char.IsDigit(expr[pos]) || expr[pos] == '.'))
+                {
+                    if (expr[pos] == '.')
                     {
-                    case "+": Onum = num2+num1; OnumberList.Add(Onum); break;
-                                      
-                    case "-": Onum = num2-num1; OnumberList.Add(Onum); break; 
-                    
-                    case "X": Onum = num2*num1; OnumberList.Add(Onum); break; 
-                                                               
-                    case "/": Onum = num2/num1; OnumberList.Add(Onum); break;        
-                    
-                    case "^": Onum = Math.Pow(num2, num1); OnumberList.Add(Onum); break;  
-                    
-                    case "log": Onum = Math.Log(num2, num1); OnumberList.Add(Onum); break;
+                        if (hasDot)
+                            throw new Exception("Invalid number format");
+                        hasDot = true;
                     }
-                }
-                return 0;
-                }
-                    
-                InumberList[^1] = OnumberList[^1];
+                    else
+                    {
+                        hasDigit = true;
+                    }
+                    pos++;
                 }
 
-                if (i <= 0 && OnumberList is not null)
-                {
-                Console.WriteLine($"The final result is: {OnumberList[^1]}");
+                if (!hasDigit)
+                    throw new Exception($"Expected number at position {start}");
 
-                Console.WriteLine($"The inputed  numbers are:  {string.Join(" ", LogList)}");
-                Console.WriteLine($"The inputed operations are: {string.Join(" ", operationList)}");
-                Console.WriteLine($"The outputed numbers are:    {string.Join(" ", OnumberList)}");
-
-                }
-                
+                return double.Parse(expr.Substring(start, pos - start));
              }
         }
 

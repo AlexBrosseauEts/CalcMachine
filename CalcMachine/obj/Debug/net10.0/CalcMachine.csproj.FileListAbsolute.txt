@@ -1,0 +1,15 @@
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\bin\Debug\net10.0\CalcMachine.exe
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\bin\Debug\net10.0\CalcMachine.deps.json
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\bin\Debug\net10.0\CalcMachine.runtimeconfig.json
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\bin\Debug\net10.0\CalcMachine.dll
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\bin\Debug\net10.0\CalcMachine.pdb
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\obj\Debug\net10.0\CalcMachine.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\obj\Debug\net10.0\CalcMachine.AssemblyInfoInputs.cache
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\obj\Debug\net10.0\CalcMachine.AssemblyInfo.cs
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\obj\Debug\net10.0\CalcMachine.csproj.CoreCompileInputs.cache
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\obj\Debug\net10.0\CalcMachine.sourcelink.json
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\obj\Debug\net10.0\CalcMachine.dll
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\obj\Debug\net10.0\refint\CalcMachine.dll
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\obj\Debug\net10.0\CalcMachine.pdb
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\obj\Debug\net10.0\CalcMachine.genruntimeconfig.cache
+C:\Users\Bross\Documents\GitHub\CalcMachine\CalcMachine\obj\Debug\net10.0\ref\CalcMachine.dll

@@ -1,0 +1,1 @@
+Make the Basic module only use 1 readline instead of multiple readlines for the inputs. The inputs 1+1 should work as is. As for the full(), make it work without asking how many operations. The input (1+1)*2 should work as is. The () should lso make the 1+1 be first. It should always have operator precedence as the standard says
