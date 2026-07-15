@@ -42,7 +42,7 @@ namespace CalcMachine
                 {
                     string word = "first"; if (i != HowLong) { word = "next"; }
                     Console.WriteLine($"({i} remaining!) Write the {word} number");
-                    double y = Convert.ToDouble(Console.ReadLine());
+                    double y = Programa.E.ParseDouble(Console.ReadLine());
                     dataSet.Add(y);
                 }
 

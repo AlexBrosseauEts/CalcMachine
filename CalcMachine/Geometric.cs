@@ -55,7 +55,7 @@ public static class Geometric
 
                 Console.WriteLine("Write the value of the known value and then what it is");
                 Console.WriteLine("(supported properties are: side, apothem, area)");
-                double value  = Convert.ToDouble(Console.ReadLine());
+                double value  = Programa.E.ParseDouble(Console.ReadLine());
                 string property = Console.ReadLine() ?? "side length";
                     
                 if (property == "apothem")
@@ -87,7 +87,7 @@ public static class Geometric
                 const double Pi = 1*(Math.PI); //Alias Shorthand
 
                 Console.WriteLine("Write the value and what it is (Radius, Circunference, Area)");
-                    double  Cvalue    = Convert.ToDouble(Console.ReadLine());
+                    double  Cvalue    = Programa.E.ParseDouble(Console.ReadLine());
                     string  Cproperty = Console.ReadLine() ?? "RADIUS";
                     double  Carea     = 0;
                     double  Clength   = 0;
@@ -153,10 +153,10 @@ public static class Geometric
             public static void Isosceles()
             {
                 Console.WriteLine("Write the value you know and then what it is (LEGS or BASE)");
-                double value = Convert.ToDouble(Console.ReadLine());
+                double value = Programa.E.ParseDouble(Console.ReadLine());
                 string property = Console.ReadLine() ?? "LEGS";
                 Console.WriteLine("Write the value of the angle you know and where is it (LEGS or BASE)");
-                double value2 = Convert.ToDouble(Console.ReadLine());
+                double value2 = Programa.E.ParseDouble(Console.ReadLine());
                        value2 = Programa.E.ToRad(value2);
                 string property2 = Console.ReadLine() ?? "LEGS";
                 if (property == "LEGS")
@@ -226,7 +226,7 @@ public static class Geometric
             public static void Trirect()
             {
                 Console.WriteLine("Write the value you know and then what it is (LEGs or HIP)");
-                double value = Convert.ToDouble(Console.ReadLine());
+                double value = Programa.E.ParseDouble(Console.ReadLine());
                 double unknown = 0;
                 string property = Console.ReadLine() ?? "LEGS";
 
@@ -265,11 +265,11 @@ public static class Geometric
             public static void Trapezium()
             {
                 Console.WriteLine("Write the value of the Lower Base");
-                double LowerBase = Convert.ToDouble(Console.ReadLine());
+                double LowerBase = Programa.E.ParseDouble(Console.ReadLine());
                 Console.WriteLine("Write the value of the Upper Base");
-                double UpperBase = Convert.ToDouble(Console.ReadLine());
+                double UpperBase = Programa.E.ParseDouble(Console.ReadLine());
                 Console.WriteLine("Write the value of the slope on the side");
-                double Slope1 = Convert.ToDouble(Console.ReadLine());
+                double Slope1 = Programa.E.ParseDouble(Console.ReadLine());
                 double Slope2 = 0;
                 Console.WriteLine("Are the two Slopes equal (Y/N)");
                 string Equal = Console.ReadLine() ?? "N"; Equal = Equal.ToUpper();
@@ -277,7 +277,7 @@ public static class Geometric
                 else
                 {
                     Console.WriteLine("Write the value of the Other Slope");
-                    Slope2 = Convert.ToDouble(Console.ReadLine());
+                    Slope2 = Programa.E.ParseDouble(Console.ReadLine());
                 }
 
                 double Perimeter = Slope1 + Slope2 + LowerBase + UpperBase;
@@ -292,10 +292,10 @@ public static class Geometric
             public static void Rectangle()
             {
                 Console.WriteLine("Write the value of one of the sides");
-                double value = Convert.ToDouble(Console.ReadLine());
+                double value = Programa.E.ParseDouble(Console.ReadLine());
 
                 Console.WriteLine("Write the other value that you know and what it is (SIDE or DIAGONAL");
-                double value2 = Convert.ToDouble(Console.ReadLine());
+                double value2 = Programa.E.ParseDouble(Console.ReadLine());
                 double unknown = 0;
                 string property = Console.ReadLine() ?? "SIDE";
 

@@ -58,7 +58,7 @@ namespace CalcMachine
                 |____________________________________________________________");
 
                 Console.WriteLine("Write the number of units and then the type of unit");
-                double number = Convert.ToDouble(Console.ReadLine());
+                double number = Programa.E.ParseDouble(Console.ReadLine());
                 string unit   = Console.ReadLine() ?? "METER";
                 unit = unit.ToUpper();
                 unit = unit.Trim();
@@ -96,7 +96,7 @@ namespace CalcMachine
                 |__________________________________________");
 
                 Console.WriteLine("Write the number of units and then the type of unit");
-                double number = Convert.ToDouble(Console.ReadLine());
+                double number = Programa.E.ParseDouble(Console.ReadLine());
                 string unit   = Console.ReadLine() ?? "KILOGRAM";
                 unit = unit.ToUpper();
                 unit = unit.Trim();
@@ -130,7 +130,7 @@ namespace CalcMachine
                 |________________________________________________");
 
                 Console.WriteLine("Write the number of units and then the type of unit");
-                double number = Convert.ToDouble(Console.ReadLine());
+                double number = Programa.E.ParseDouble(Console.ReadLine());
                 string unit   = Console.ReadLine() ?? "METER / SECOND";
                 unit = unit.ToUpper();
                 unit = unit.Trim();
@@ -157,7 +157,7 @@ namespace CalcMachine
                 |_______________________________________");
 
                 Console.WriteLine("Write the number of units and then the type of unit");
-                double number = Convert.ToDouble(Console.ReadLine());
+                double number = Programa.E.ParseDouble(Console.ReadLine());
                 string unit   = Console.ReadLine() ?? "KILOGRAM";
                 unit = unit.ToUpper();
                 unit = unit.Trim();

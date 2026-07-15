@@ -34,9 +34,10 @@ namespace CalcMachine
                 |4 or FUNC     - Go to the Function Calculator.
                 |5 or STATS    - Go to the Statistic Calculator.
                 |6 or CONVERT  - Go to the Conversion Calculator.
-                |7 or OTHER    - Go to other Calculators.
-                |8 or LOG      - Writes all the calculations into a file.
-                |9 or EXIT     - Exits the Program.
+                |7 or SOLVER   - Go to the Equation Solver.
+                |8 or OTHER    - Go to other Calculators.
+                |9 or LOG      - Writes all the calculations into a file.
+                |10 or EXIT    - Exits the Program.
                 |_______________________________________________________");
                 string OpeningMenu = Console.ReadLine() ?? "1";
 
@@ -69,15 +70,19 @@ namespace CalcMachine
                     Conversion.Open();
                     break;
 
-                    case "OTHER" or "7":
+                    case "SOLVER" or "7":
+                    Solver.Open();
+                    break;
+
+                    case "OTHER" or "8":
                     Other.Prime();
                     break;
 
-                    case "LOG" or "8":
+                    case "LOG" or "9":
                     Log();
                     break;
 
-                    case "EXIT" or "9":
+                    case "EXIT" or "10":
                     whiler = false;
                     break;
                 }
@@ -120,6 +125,15 @@ namespace CalcMachine
                 Console.SetCursorPosition(0, Console.CursorTop - pedro);
                 Console.Write(new string(' ', Console.WindowWidth));
                 Console.SetCursorPosition(0, Console.CursorTop - joao);
+            }
+            
+            public static double ParseDouble(string? input) //Parses double with both . and , as decimal separators
+            {
+                if (string.IsNullOrWhiteSpace(input))
+                    throw new FormatException("Input cannot be null or empty");
+                
+                string normalized = input.Replace(',', '.');
+                return double.Parse(normalized, System.Globalization.CultureInfo.InvariantCulture);
             }                    
         }
   }

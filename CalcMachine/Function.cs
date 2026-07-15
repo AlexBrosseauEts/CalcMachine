@@ -47,10 +47,10 @@ namespace CalcMachine
                 case "3":      
                 Console.WriteLine("Your function is on the format: f(x) = ax³ + bx² + cx + d");
                 Console.WriteLine("Input, respectivelly, the values of a, b, c and d");
-                a = Convert.ToDouble(Console.ReadLine());
-                b = Convert.ToDouble(Console.ReadLine());
-                c = Convert.ToDouble(Console.ReadLine());
-                d = Convert.ToDouble(Console.ReadLine());
+                a = Programa.E.ParseDouble(Console.ReadLine());
+                b = Programa.E.ParseDouble(Console.ReadLine());
+                c = Programa.E.ParseDouble(Console.ReadLine());
+                d = Programa.E.ParseDouble(Console.ReadLine());
 
                 XorY();
                 void Cubic()
@@ -73,9 +73,9 @@ namespace CalcMachine
                 case "2":
                 Console.WriteLine("Your function is on the format: f(x) = aX² + bX + c");
                 Console.WriteLine("Input, respectivelly, the values of a, b and c");
-                a = Convert.ToDouble(Console.ReadLine());
-                b = Convert.ToDouble(Console.ReadLine());
-                c = Convert.ToDouble(Console.ReadLine());
+                a = Programa.E.ParseDouble(Console.ReadLine());
+                b = Programa.E.ParseDouble(Console.ReadLine());
+                c = Programa.E.ParseDouble(Console.ReadLine());
 
                 XorY();
                 void Quadratic()
@@ -100,8 +100,8 @@ namespace CalcMachine
                 case "1":
                 Console.WriteLine("Your function is on the format: f(x) = aX + b");
                 Console.WriteLine("Input, respectivelly, the values of a and b");
-                a = Convert.ToDouble(Console.ReadLine());
-                b = Convert.ToDouble(Console.ReadLine());
+                a = Programa.E.ParseDouble(Console.ReadLine());
+                b = Programa.E.ParseDouble(Console.ReadLine());
 
                 XorY();
                 void Linear()
@@ -129,12 +129,12 @@ namespace CalcMachine
                 {
                     case "x":
                     Console.WriteLine("Write your x");
-                    x = Convert.ToDouble(Console.ReadLine());
+                    x = Programa.E.ParseDouble(Console.ReadLine());
                     break;
 
                     case "f(x)":
                     Console.WriteLine("Write your f(x)");
-                    fx = Convert.ToDouble(Console.ReadLine());
+                    fx = Programa.E.ParseDouble(Console.ReadLine());
                     break;
                 }
                 }               

@@ -23,11 +23,14 @@ namespace CalcMachine
                 |*   -> a * b = c
                 |/   -> a / b = c
                 |^   -> a ^ b = c
-                |Log -> LogA(base B) = C
+                |Log -> log(value:base) = C
+                |
+                |Decimals: Use either . or , (e.g., 3.14 or 3,14)
                 |
                 |Examples:
                 |  Simple: 1+1
                 |  Full:   (1+1)*2
+                |  Log:    log(8:2)
                 |__________________________________________________________");
 
                 switch(Switch)
@@ -199,11 +202,11 @@ namespace CalcMachine
                 {
                     pos += 3;
                     if (pos >= expr.Length || expr[pos] != '(')
-                        throw new Exception("log requires format: log(value,base)");
+                        throw new Exception("log requires format: log(value:base)");
                     pos++;
                     double value = ParseExpression(expr, ref pos);
-                    if (pos >= expr.Length || expr[pos] != ',')
-                        throw new Exception("log requires format: log(value,base)");
+                    if (pos >= expr.Length || expr[pos] != ':')
+                        throw new Exception("log requires format: log(value:base)");
                     pos++;
                     double baseValue = ParseExpression(expr, ref pos);
                     if (pos >= expr.Length || expr[pos] != ')')
@@ -218,9 +221,9 @@ namespace CalcMachine
 
                 bool hasDigit = false;
                 bool hasDot = false;
-                while (pos < expr.Length && (char.IsDigit(expr[pos]) || expr[pos] == '.'))
+                while (pos < expr.Length && (char.IsDigit(expr[pos]) || expr[pos] == '.' || expr[pos] == ','))
                 {
-                    if (expr[pos] == '.')
+                    if (expr[pos] == '.' || expr[pos] == ',')
                     {
                         if (hasDot)
                             throw new Exception("Invalid number format");
@@ -236,7 +239,8 @@ namespace CalcMachine
                 if (!hasDigit)
                     throw new Exception($"Expected number at position {start}");
 
-                return double.Parse(expr.Substring(start, pos - start));
+                string numberStr = expr.Substring(start, pos - start).Replace(',', '.');
+                return double.Parse(numberStr, System.Globalization.CultureInfo.InvariantCulture);
              }
         }
 
